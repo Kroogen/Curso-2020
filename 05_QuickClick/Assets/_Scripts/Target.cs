@@ -13,10 +13,13 @@ public class Target : MonoBehaviour
     public float torqueRange = 10;
     public float positionLimitX = 4;
     public float positionLimitY = -5;
-
+    private GameManager gameManager;
+    
     // Start is called before the first frame update
     void Start()
     {
+        //gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        gameManager = FindObjectOfType<GameManager>();
         _rigidbody = GetComponent<Rigidbody>();
         _rigidbody.AddForce(RandomForce(),ForceMode.Impulse);
         _rigidbody.AddTorque(RandomTorque(),RandomTorque(),RandomTorque(), ForceMode.Impulse);
@@ -41,6 +44,7 @@ public class Target : MonoBehaviour
     private void OnMouseOver()
     {
         Destroy(gameObject);
+        gameManager.UpdateScore(5);
     }
     
     private void OnTriggerEnter(Collider other)
