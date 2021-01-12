@@ -56,6 +56,10 @@ public class Target : MonoBehaviour
         {
             Destroy(gameObject);
             gameManager.UpdateScore(-pointValue);
+            if (gameObject.CompareTag("Good"))
+            {
+                gameManager.setLives(-1);
+            }
         }
     }
 }
