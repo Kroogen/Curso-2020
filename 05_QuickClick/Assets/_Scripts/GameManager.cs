@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,12 +18,15 @@ public class GameManager : MonoBehaviour
 
     public GameStates gameState;
     public List<GameObject> targetPrefabs;
-    public float spawnRate = 1;
+    public float _spawnRate = 1;
+    public float spawnRate;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI gameOverText;
     public TextMeshProUGUI livesText;
     private int _score;
     private int _lives;
+    public Button restartButton;
+    public GameObject startPanel;
     private int score
     {
         set
@@ -39,10 +44,10 @@ public class GameManager : MonoBehaviour
         get => _lives;
         set => _lives = Mathf.Clamp(value, 0, 10);
     }
-
-    // Start is called before the first frame update
-    void Start()
+    public void StartGame(int difficulty)
     {
+        spawnRate = _spawnRate / difficulty;
+        startPanel.gameObject.SetActive(false);
         gameState = GameStates.inGame;
         StartCoroutine(SpawnTarger());
         score = 0;
@@ -85,6 +90,12 @@ public class GameManager : MonoBehaviour
     {
         gameOverText.gameObject.SetActive(true);
         gameState = GameStates.gameOver;
+        restartButton.gameObject.SetActive(true);
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
 }

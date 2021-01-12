@@ -16,7 +16,7 @@ public class Target : MonoBehaviour
     private GameManager gameManager;
     public int pointValue;
     public ParticleSystem _ParticleSystem;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +26,7 @@ public class Target : MonoBehaviour
         _rigidbody.AddForce(RandomForce(),ForceMode.Impulse);
         _rigidbody.AddTorque(RandomTorque(),RandomTorque(),RandomTorque(), ForceMode.Impulse);
         transform.position = RandomSpawnPos();
+        
     }
 
     private Vector3 RandomSpawnPos()
