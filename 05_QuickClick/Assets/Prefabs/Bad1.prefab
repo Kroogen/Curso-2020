@@ -131,6 +131,9 @@ MonoBehaviour:
   torqueRange: 10
   positionLimitX: 4
   positionLimitY: -5
+  pointValue: -10
+  _ParticleSystem: {fileID: 3199346384015752365, guid: 58a126ade66fc7c4f84c547d13b3aa7e,
+    type: 3}
 --- !u!96 &1757381219537157040
 TrailRenderer:
   serializedVersion: 2

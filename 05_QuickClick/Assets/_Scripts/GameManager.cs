@@ -10,8 +10,19 @@ public class GameManager : MonoBehaviour
     public List<GameObject> targetPrefabs;
     public float spawnRate = 1;
     public TextMeshProUGUI scoreText;
-    private int score;
-    
+    private int _score;
+    private int score
+    {
+        set
+        {
+            _score = Mathf.Clamp(value, 0, 999);
+        }
+        get
+        {
+            return _score;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {

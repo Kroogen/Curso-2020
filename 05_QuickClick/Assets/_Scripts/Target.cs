@@ -14,6 +14,8 @@ public class Target : MonoBehaviour
     public float positionLimitX = 4;
     public float positionLimitY = -5;
     private GameManager gameManager;
+    public int pointValue;
+    public ParticleSystem _ParticleSystem;
     
     // Start is called before the first frame update
     void Start()
@@ -44,7 +46,8 @@ public class Target : MonoBehaviour
     private void OnMouseOver()
     {
         Destroy(gameObject);
-        gameManager.UpdateScore(5);
+        Instantiate(_ParticleSystem, transform.position, _ParticleSystem.transform.rotation);
+        gameManager.UpdateScore(pointValue);
     }
     
     private void OnTriggerEnter(Collider other)
@@ -52,6 +55,7 @@ public class Target : MonoBehaviour
         if (other.CompareTag("KillZone"))
         {
             Destroy(gameObject);
+            gameManager.UpdateScore(-pointValue);
         }
     }
 }

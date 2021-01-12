@@ -130,3 +130,6 @@ MonoBehaviour:
   torqueRange: 10
   positionLimitX: 4
   positionLimitY: -5
+  pointValue: 5
+  _ParticleSystem: {fileID: 2088871590894813759, guid: 745208c9d6e104225bd99e1ab894e3bb,
+    type: 3}
