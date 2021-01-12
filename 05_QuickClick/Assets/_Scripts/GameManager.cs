@@ -7,6 +7,14 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
 
+    public enum GameStates
+    {
+        loading,
+        inGame,
+        gameOver
+    }
+
+    public GameStates gameState;
     public List<GameObject> targetPrefabs;
     public float spawnRate = 1;
     public TextMeshProUGUI scoreText;
@@ -14,7 +22,6 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI livesText;
     private int _score;
     private int _lives;
-    private bool gameOver;
     private int score
     {
         set
@@ -36,17 +43,17 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameState = GameStates.inGame;
         StartCoroutine(SpawnTarger());
         score = 0;
         lives = 3;
         UpdateScore(0);
         gameOverText.gameObject.SetActive(false);
-        gameOver = false;
     }
 
     IEnumerator SpawnTarger()
     {
-        while (!gameOver)
+        while (gameState == GameStates.inGame)
         {
             yield return new WaitForSeconds(spawnRate);
             int index = Random.Range(0, targetPrefabs.Count);
@@ -77,7 +84,7 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         gameOverText.gameObject.SetActive(true);
-        gameOver = true;
+        gameState = GameStates.gameOver;
     }
 
 }

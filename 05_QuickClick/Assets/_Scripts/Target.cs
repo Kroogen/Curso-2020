@@ -45,9 +45,12 @@ public class Target : MonoBehaviour
 
     private void OnMouseOver()
     {
-        Destroy(gameObject);
-        Instantiate(_ParticleSystem, transform.position, _ParticleSystem.transform.rotation);
-        gameManager.UpdateScore(pointValue);
+        if (gameManager.gameState == GameManager.GameStates.inGame)
+        {
+            Destroy(gameObject);
+            Instantiate(_ParticleSystem, transform.position, _ParticleSystem.transform.rotation);
+            gameManager.UpdateScore(pointValue);
+        }
     }
     
     private void OnTriggerEnter(Collider other)
