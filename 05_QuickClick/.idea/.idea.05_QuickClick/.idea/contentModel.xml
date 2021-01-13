@@ -10,6 +10,7 @@
         <e p="_Scripts" t="Include">
           <e p="DificultyButton.cs" t="Include" />
           <e p="GameManager.cs" t="Include" />
+          <e p="PointerFollow.cs" t="Include" />
           <e p="Target.cs" t="Include" />
         </e>
         <e p="Course Library" t="Include">

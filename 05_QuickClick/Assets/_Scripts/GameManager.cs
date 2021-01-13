@@ -1,10 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
@@ -27,6 +29,7 @@ public class GameManager : MonoBehaviour
     private int _lives;
     public Button restartButton;
     public GameObject startPanel;
+    private string KEY_MAX_SCORE = "MaxScore";
     private int score
     {
         set
@@ -44,6 +47,12 @@ public class GameManager : MonoBehaviour
         get => _lives;
         set => _lives = Mathf.Clamp(value, 0, 10);
     }
+
+    private void Start()
+    {
+        MaxScore();
+    }
+
     public void StartGame(int difficulty)
     {
         spawnRate = _spawnRate / difficulty;
@@ -75,7 +84,12 @@ public class GameManager : MonoBehaviour
             setLives(1);
             score -= 100;
         }
+    }
 
+    public void MaxScore()
+    {
+        int maxScore = PlayerPrefs.GetInt(KEY_MAX_SCORE,0);
+        scoreText.text = "Max Score: " + maxScore;
     }
 
     public void setLives(int valor)
@@ -88,6 +102,9 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        int maxScore = PlayerPrefs.GetInt(KEY_MAX_SCORE,0);
+        if(score > maxScore)
+            PlayerPrefs.SetInt(KEY_MAX_SCORE,score);
         gameOverText.gameObject.SetActive(true);
         gameState = GameStates.gameOver;
         restartButton.gameObject.SetActive(true);
